@@ -43,6 +43,7 @@ install -m 0644 etc/cron.d/repo      $RPM_BUILD_ROOT%{_sysconfdir}/cron.d/
 install -m 0644 etc/mash_koji_config $RPM_BUILD_ROOT%{_sysconfdir}/
 install -m 0644 etc/osg-koji-tags/osg-tags.exclude \
                        $RPM_BUILD_ROOT%{_sysconfdir}/osg-koji-tags/
+install -m 0644 etc/repo_mirror_hostname $RPM_BUILD_ROOT%{_sysconfdir}/
 
 # populated by update_mashfiles.sh
 touch $RPM_BUILD_ROOT%{_sysconfdir}/osg-koji-tags/osg-tags
@@ -65,6 +66,7 @@ install -m 0644 share/repo/mash.template $RPM_BUILD_ROOT%{_datadir}/repo/
 %config(noreplace) %{_sysconfdir}/mash_koji_config
 %config(noreplace) %{_sysconfdir}/osg-koji-tags/osg-tags.exclude
 %ghost             %{_sysconfdir}/osg-koji-tags/osg-tags
+%config(noreplace) %{_sysconfdir}/repo_mirror_hostname
 %dir               %{_usr}/local/mirror
 
 %changelog

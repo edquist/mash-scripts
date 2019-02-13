@@ -43,6 +43,14 @@ threshold = 24 #hours
 timeout = 10 #seconds
 socket.setdefaulttimeout(timeout)
 
+mirror_hostname_file = "/etc/repo_mirror_hostname"
+default_mirror_hostname = "repo.opensciencegrid.org"
+try:
+    with open(mirror_hostname_file) as f:
+        hostname = f.read().strip() or default_mirror_hostname
+except IOError:
+    hostname = default_mirror_hostname
+
 log("Using following parameters")
 log("tags:"+str(tags))
 log("hosts:"+str(mirrorhosts))
@@ -50,11 +58,6 @@ log("archs:"+str(archs))
 log("threshold:"+str(threshold)+" (hours)")
 log("timeout:"+str(timeout)+" (seconds)")
 print
-
-#gethostname() returns actual instance name (like repo2.opensciencegrid.org)
-hostname="repo.opensciencegrid.org"
-if socket.gethostname() == "repo-itb.opensciencegrid.org":
-    hostname="repo-itb.opensciencegrid.org"
 
 def mkarchurl(host,tag,arch):
     series,dver,repo = tag.split('-')[-3:]
